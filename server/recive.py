@@ -8,7 +8,7 @@ app = Flask(__name__)
 def handle_post():
     data = request.json # handle JSON data
     print(data)
-    resp = client.chat(model=data["model"], messages=[{'role':'user', 'content': f'respond: {data["prompt"]}'}])
+    resp = client.chat(model=data["model"], messages=[{'role':'user', 'content': f'respond to {data["NAME"]}: {data["prompt"]}'}])
     
     # Process the data as needed
     return {'status': 'success', 'response': resp["message"]["content"]}, 200
