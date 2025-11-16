@@ -35,9 +35,9 @@ This makes it easy to:
 ## **Installation**
 
 ```bash
-git clone https://github.com/yourname/dove
-cd dove
-pip install -r requirements.txt
+git clone https://github.com/MOHAPY24/Dove
+cd Dove
+pip install requests flask
 ```
 
 ## **Usage**
