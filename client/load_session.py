@@ -9,5 +9,5 @@ def strip_json_comments(text):
 
 
 def load():
-    with open("client/configs/user.jsonc", 'r') as f:
+    with open("client/configs/session.jsonc", 'r') as f:
         return json.loads(strip_json_comments(f.read()))

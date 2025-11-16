@@ -37,12 +37,12 @@ This makes it easy to:
 ```bash
 git clone https://github.com/MOHAPY24/Dove
 cd Dove
-pip install requests flask
+pip install -r requirements.txt
 ```
 
 ## **Usage**
 
-### **Start the Dove server**
+### **Start the Dove server** if your hosting a model.
 
 ```bash
 python server/app.py
@@ -50,10 +50,11 @@ python server/app.py
 
 ### **Send a request from a client**
 
-Edit the client/dove.py file and add your prompt in the data variable where it says prompt
-then
+Edit the client/configs/session.jsonc and client/configs/user.jsonc file and add your prompt in the data variable where it says prompt
+then for a CLI helper (you can code your own system using the class in `client/dove.py`)
+
 ```bash
-python3 client/dove.py
+python3 client/client.py
 ```
 
 ## **Roadmap**

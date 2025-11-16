@@ -1,26 +1,29 @@
 import json
 import requests
 import load_conf
+import load_session
 
 
-config = load_conf.load()
+class DoveClient:
+    def __init__(self):
+        self.config = load_conf.load()
+        self.sessionco = load_session.load()
+        self.URL = self.sessionco["url"]
 
-if config["meta"]["verbose?"] == True:
-    verb = True
-else:
-    verb = False
+    def create_data(self, prompt:str, model:str):
+        if self.config["meta"]["verbose?"]:
+            print("[*] Made JSON")
+        self.data = {"NAME": f"{self.config["meta"]["sender"]}", "prompt": prompt, 'model':model}
+    
+    def send_to_remote(self):
+        if self.config["meta"]["verbose?"]:
+            print("[*] Sending JSON")
+        self.response = requests.post(self.URL, json=self.data)
 
-url = 'http://127.0.0.1:5000/post_endpoint'
-if verb:
-    print("[*] Made JSON")
-data = {"NAME": f"{config["meta"]["sender"]}", "prompt": 'Hello!', 'model':'phi3:mini'}
-
-if verb:
-    print("[*] Sending JSON")
-response = requests.post(url, json=data)
-if verb:
-    print("[*] JSON Sent, response recieved")
-print(response.json()["response"])        
-if verb:
-    print("[*] Response back, showing full JSON response")      
-    print(response.json())
+    def recive_from_remote(self):
+        if self.config["meta"]["verbose?"]:
+            print("[*] JSON Sent, response recieved")
+        print(self.response.json()["response"])        
+        if self.config["meta"]["verbose?"]:
+            print("[*] Response back, showing full JSON response")      
+            print(self.response.json())

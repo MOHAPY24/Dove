@@ -1,6 +1,6 @@
 {
     "meta":{
-        "verbose?":true, // If you want to know whats going on EXACTLY
+        "verbose?":false, // If you want to know whats going on EXACTLY
         "sender":"momo" // Your name
     }
 }
