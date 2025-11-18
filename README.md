@@ -59,7 +59,6 @@ python3 client/client.py
 
 ## **Roadmap**
 
-* [ ] Authentication support
 * [ ] Streaming responses
 * [ ] Model listing & management endpoints
 * [ ] Optional encryption layer

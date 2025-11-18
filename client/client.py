@@ -2,11 +2,6 @@ import dove as dv
 
 print("DoveCLI Client, make sure to configure your session params in client/config/session.jsonc and client/config/user.jsonc!")
 authkey = input("Password >> ")
-if authkey.isalnum():
-    authkey = int(authkey)
-else:
-    print("Authkey cannot be text. please enter an integer value.")
-    exit(1)
 model = input("Model >> ")
 prompt = input("Prompt >> ")
 

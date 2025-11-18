@@ -1,5 +1,5 @@
 from flask import Flask, request
-import ollama
+import ollama, json, utils
 
 client = ollama.Client()
 app = Flask(__name__)
@@ -7,14 +7,20 @@ prev_time = 0
 prev_content = ""
 prev_name = ""
 
-def init(key):
-    global KEY
-    KEY = key
+with open("server/config.jsonc", 'r') as r:
+    conf = json.loads(utils.strip_json_comments(r.read()))
+
+
+try:
+    f = open("access.log", 'a')
+except FileNotFoundError:
+    f = open("access.log", 'w')
 
 @app.route('/post_endpoint', methods=['POST'])
 def handle_post():
     global prev_content, prev_name, prev_time, prev_name
     data = request.json # handle JSON data
+    f.write(str(data))
     print(f"POST: {data}")
     if data["time"] == prev_time and data['NAME'] == prev_name:
         return {'status':'spam', 'response':"Too much prompts being sent from this device, please slow down."}
@@ -28,5 +34,6 @@ def handle_post():
 
 @app.route('/auth', methods=['POST'])
 def getkey():
-    return {'status': 'success', 'key': KEY}, 200
+    return {'status': 'success', 'key': conf["passwd"]}, 200
+
 
